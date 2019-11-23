@@ -1,0 +1,275 @@
+﻿ablo:D3 Base Structs
+
+From UnKnoWnCheaTs Game Hacking Wiki
+Revision as of 19:24, 23 July 2015 by Xeno (talk | contribs) (Created page with "By: dogmatt =Structs= <syntaxhighlight> struct Vec2; struct Vec3; struct Vec4; struct Mat4; class CActor; class CActorMovement; class CActorCommonData; struct tObManStorag...")
+
+(diff) ← Older revision | Latest revision (diff) | Newer revision → (diff)
+By: dogmatt
+
+Structs
+
+  
+struct Vec2;
+struct Vec3;
+struct Vec4;
+struct Mat4;
+class CActor;
+class CActorMovement;
+class CActorCommonData;
+struct tObManStorage;
+class ObMan;
+class ObManPtr;
+struct tObData;
+class CObDataContainer;
+class CObLocal;
+
+//-------------------------------------
+
+struct Vec2
+{
+    float x;     // 0x000
+    float y;     // 0x004
+};
+
+struct Vec3
+{
+    float x;     // 0x000
+    float y;     // 0x004
+    float z;     // 0x008
+};
+
+class CActor
+{
+public:
+    ULONG id;     // 0x000
+    ULONG id_animation;     // 0x004
+    CHAR Name;     // 0x008
+    UCHAR unknown_40;     // 0x040
+    Vec3 Rot;     // 0x090
+    float fRot;     // 0x09C
+    Vec3 Pos;     // 0x0A0
+    float f142;     // 0x0AC
+    Vec3 Pos1;     // 0x0B0
+    float f734;     // 0x0BC
+    Vec3 Pos2;     // 0x0C0
+    UCHAR unknown_CC;     // 0x0CC
+    ULONG guid_Mov;     // 0x0D8
+    ULONG guid_Unk;     // 0x0DC
+    UCHAR unknown_E0;     // 0x0E0
+    Vec3 Pos3;     // 0x100
+    UCHAR unknown_10C;     // 0x10C
+    Vec3 Pos4;     // 0x140
+    UCHAR unknown_14C;     // 0x14C
+    Vec3 PosObj;     // 0x210
+    UCHAR unknown_21C;     // 0x21C
+    CActorMovement* Mov;     // 0x380
+    float Direction;     // 0x384
+    UCHAR unknown_388;     // 0x388
+    Vec3 Vel;     // 0x3A0
+    Vec3 Pos6;     // 0x3AC
+    UCHAR unknown_3B8;     // 0x3B8
+    ULONG Counter;     // 0x418
+    UCHAR unknown_41C;     // 0x41C
+};
+
+class CActorMovement
+{
+public:
+    ULONG* vt;     // 0x000
+    ULONG Active;     // 0x004
+    float Speed;     // 0x008
+    float SpeedCurrent;     // 0x00C
+    UCHAR unknown_10;     // 0x010
+    Vec3 Pos;     // 0x03C
+    UCHAR unknown_48;     // 0x048
+    Vec3 Pos2;     // 0x04C
+    UCHAR unknown_58;     // 0x058
+    Vec3 Tp;     // 0x074
+    UCHAR unknown_80;     // 0x080
+    ULONG unk;     // 0x088
+    UCHAR unknown_8C;     // 0x08C
+    Vec3 Pos3;     // 0x0A4
+    UCHAR unknown_B0;     // 0x0B0
+    float Speed2;     // 0x0B8
+    UCHAR unknown_BC;     // 0x0BC
+    ULONG id;     // 0x15C
+    ULONG FrameMov;     // 0x160
+    ULONG Frame;     // 0x164
+    ULONG FramePrev;     // 0x168
+    UCHAR unknown_16C;     // 0x16C
+    float Direction;     // 0x170
+    UCHAR unknown_174;     // 0x174
+};
+
+class CActorCommonData
+{
+public:
+    ULONG id;     // 0x000
+    CHAR Name;     // 0x004
+    ULONG N11A3D0361;     // 0x084
+    ULONG N11A3D036;     // 0x088
+    ULONG N11A3DFFE;     // 0x08C
+    UCHAR unknown_90;     // 0x090
+};
+
+template <class T>
+    class tContainer
+    {
+    public:
+        CHAR Name;
+        ULONG Limit;
+        ULONG SizeOf;
+        ULONG Count;
+        UCHAR unknown_10C;
+        T** List;
+        UCHAR unknown_14C;
+        ULONG Bits;
+        UCHAR unknown_190;
+    };
+
+struct tObManStorage
+{
+    UCHAR unknown_0;     // 0x000
+    CObDataContainer* Data;     // 0x0A8
+    UCHAR unknown_AC;     // 0x0AC
+    tContainer<CActorCommonData>** ACD;     // 0x0D4
+    UCHAR unknown_D8;     // 0x0D8
+    tContainer<CActor>* Actors;     // 0x134
+    UCHAR unknown_138;     // 0x138
+    CObLocal* Local;     // 0x1B8
+    UCHAR unknown_1BC;     // 0x1BC
+};
+
+class ObMan
+{
+public:
+    struct tPad
+    {
+        UCHAR unknown_0;     // 0x000
+        ULONG FrameCurrent;     // 0x038
+        UCHAR unknown_3C;     // 0x03C
+    };
+    tPad Data;     // 0x000
+    tObManStorage Storage;     // 0x77C <-- TLS, 0x94BB80
+};
+
+class ObManPtr
+{
+public:
+    ObMan* Ptr;     // 0x000
+};
+
+struct tObData
+{
+    UCHAR unknown_0;     // 0x000
+    ULONG id_anim;     // 0x004
+    ULONG id_actor;     // 0x008
+    UCHAR unknown_C;     // 0x00C
+};
+
+class CObDataContainer
+{
+public:
+    UCHAR unknown_0;     // 0x000
+    tObData Data;     // 0x058
+    UCHAR unknown_198;     // 0x198
+};
+
+class CObLocal
+{
+public:
+    ULONG Index;     // 0x000
+    UCHAR unknown_4;     // 0x004
+};
+
+//-------------------------------------
+teh usage:
+  
+
+//-- init
+struct
+{
+    ObManPtr *ObMan;
+} m_Engine;
+*(PUCHAR *) &m_Engine.ObMan = (PUCHAR) 0x156C8CC;
+
+//-- frame
+    if(!m_Engine.ObMan->Ptr)
+        return 0;
+    tContainer<CActor>* Actors = m_Engine.ObMan->Ptr->Storage.Actors;
+    if(!Actors)
+        return 0;
+    if(Actors->SizeOf != sizeof(CActor))
+        return 0;
+
+    CActor *pLocal = GetActor(GetLocalActorGuid()),
+        **pList = Actors->List;
+
+    if(!pLocal || !pLocal->Mov || !HandleActor(m_Local, pLocal))
+        return 0;
+
+    //// l33b! old 'method'
+    //for(int i = 0; i < Actors->Count; i++)
+    //{
+    //    CActor &c = pList'';
+    //    if(c.id_animation == ~0)
+    //        continue;
+    //    pLocal = &c;
+    //    break;
+    //}
+
+    for(int i = 0; i < Actors->Count && m_ActorsCount < MAX_PLAYERS; i++)
+    {
+        CActor &c = pList''; <- TODO: handle more than 0
+
+        if(&c == pLocal)
+            continue;
+        if(!c.Mov)
+            continue;
+
+        if(HandleActor(m_Actors[m_ActorsCount], &c))
+            m_ActorsCount++;
+    }teh helpers:
+  
+UINT CGame::GetLocalActorGuid()
+{
+    ObMan *ob = m_Engine.ObMan->Ptr;
+
+    if(    !ob->Storage.Local ||
+        !ob->Storage.Data )
+        return ~0;
+
+    if( ob->Storage.Local->Index == ~0 )
+        return ~0;
+
+    CObDataContainer *Data = (CObDataContainer *) (
+        (ULONG_PTR)ob->Storage.Data + ob->Storage.Local->Index * 0x7FF8 );
+
+    return Data->Data.id_actor;
+}
+
+CActor *CGame::GetActor(ULONG guid)
+{
+    if(guid == ~0)
+        return 0;
+
+    ObMan *ob = m_Engine.ObMan->Ptr;
+    if(!ob)
+        return 0;
+
+    typedef CActor TC; <- template it to use with other lists!
+    tContainer<TC>* pct = ob->Storage.Actors;
+
+    if(!pct) // || sizeof(TC) != pct->SizeOf) // fcuk it. want to use unknown size
+        return 0;
+
+    USHORT id = (guid & 0xFFFF);
+    if(id > pct->Limit)
+        return 0;
+
+    USHORT l = (id >> pct->Bits);
+    USHORT e = id & ((1 << pct->Bits) - 1);
+
+    TC *Ret = (TC *)((ULONG_PTR)&pct->List + pct->SizeOf * e);
+    return (Ret->id == guid) ? Ret : 0;
+}

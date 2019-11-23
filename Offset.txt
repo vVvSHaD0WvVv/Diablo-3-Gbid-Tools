@@ -1,0 +1,73 @@
+public static class OffsetConversion
+    {
+        public static readonly Version SupportedVersion = new Version(2, 4, 3, 42655);
+
+        public const int UXControlRect = 0x468;
+        public const int UXControlMinimapRect = 0x0C50; 
+        public const int ScreenManager = 0x1B9EC5C;
+        public const int ActiveSeason = 9;
+        public const int BattleNetClient = 0x10;
+        public const int SelectedHeroes = 0x0A8;
+
+        public const int HeroesData = 0x98;
+
+        /* Enigma.D3 */
+        public const int ApplicationLoopCount = 0x1C13F14;
+        public const int AttributeDescriptors = 0x1C66660;
+        [Obsolete("Offset not updated to latest version")]
+        public const int BuffManager = 0x1E31F44;
+        public const int LevelArea = 0x1B9E68C;
+        public const int LevelAreaName = 0x1B9E690;
+        public const int LocalData = 0x1C15148;
+        public const int ObjectManager = 0x1C13E98;
+        public const int TrickleManager = 0x1BF0A08;
+        public const int SnoGroupsByCode = 0x1C13C90;
+        public const int SnoGroups = 0x1C13C8C;
+        public const int VideoPreferences = 0x19CE0A0;
+        public const int GameplayPreferences = 0x19CE610;
+
+        [Obsolete("Offset not updated to latest version")]
+        public const int UIHandlers = 0x1C28B20;/* Not*/
+        public const int UIReference = 0x1C7C488;/* Not*/
+
+        /* Counter */
+        [Obsolete("Offset not updated to latest version")]
+        public const int UIHandlerCount = 1257;/* Not*/
+        [Obsolete("Offset not updated to latest version")]
+        public const int UIReferenceCount = 2767;/* Not*/
+
+        public const int AttributeDescriptorsCount = ((0x1C747CC - 0x1C6667C) / AttributeDescriptor.SizeOf) - 1;
+    }
+
+
+public partial class PlayerData : MemoryObject
+{
+        public const int SizeOf = 0xB370; // 45936
+}
+
+public partial class Storage : MemoryObject
+{
+	public const int SizeOf = 0x1A4; // 420 // Unsure about full size
+
+
+        public Ptr<ActorCommonDataManager> ActorCommonDataManager { get { return ReadPointer<ActorCommonDataManager>(0x160); } }
+        public Ptr<PlayerDataManager> PlayerDataManager { get { return ReadPointer<PlayerDataManager>(0x134); } }
+
+        public Ptr<FastAttrib> FastAttrib { get { return ReadPointer<FastAttrib>(0x154); } }
+        public Ptr<QuestManager> Quests { get { return ReadPointer<QuestManager>(0x170); } } 
+}
+
+public partial class ObjectManager : MemoryObject
+{
+	public const int SizeOf = 0xA10;
+
+        public Storage Storage { get { return Read<Storage>(0x7C0); } }
+        public Ptr<Container<Scene>> Scenes { get { return ReadPointer<Container<Scene>>(0x9C8); } } // UPDATED
+
+        public Ptr<X790> x790 { get { return ReadPointer<X790>(0x7B8); } } 
+        public Ptr<ExpandableContainer<Actor>> RActors { get { return ReadPointer<ExpandableContainer<Actor>>(0x988); } }
+        public Ptr<ListPack<TimedEvent>> xA04_Ptr_TimedEvents { get { return ReadPointer<ListPack<TimedEvent>>(0xA34); } }
+        public Ptr<Player> Player { get { return ReadPointer<Player>(0xA0C); } }
+        public Ptr<UIManager> UI { get { return ReadPointer<UIManager>(0x9FC); } }
+        public Ptr<Container<World>> CWorlds { get { return ReadPointer<Container<World>>(0xA04); } }
+}
